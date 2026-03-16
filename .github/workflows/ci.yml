@@ -5,12 +5,23 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+
+  api-test-1:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run API test
-        run: npm test
+      - name: Run API test 1
+        run: node tests/api.test.js
+
+  api-test-2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run API test 2
+        run: node tests/posts.test.js
