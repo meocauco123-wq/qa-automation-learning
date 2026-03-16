@@ -1,0 +1,7 @@
+{
+  "name": "qa-automation-learning",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node tests/api.test.js"
+  }
+}
