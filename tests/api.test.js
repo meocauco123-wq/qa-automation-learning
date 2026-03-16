@@ -1,10 +1,19 @@
 const https = require("https");
+const fs = require("fs");
 
 console.log("Start API test");
 
 https.get("https://jsonplaceholder.typicode.com/posts/1", (res) => {
 
-  console.log("STATUS:", res.statusCode);
+  const result = `
+API TEST RESULT
+status: ${res.statusCode}
+time: ${new Date()}
+`;
+
+  fs.writeFileSync("reports/api-report.txt", result);
+
+  console.log(result);
 
   if (res.statusCode === 200) {
     console.log("TEST PASS");
@@ -14,7 +23,4 @@ https.get("https://jsonplaceholder.typicode.com/posts/1", (res) => {
     process.exit(1);
   }
 
-}).on("error", (err) => {
-  console.log("ERROR:", err.message);
-  process.exit(1);
 });

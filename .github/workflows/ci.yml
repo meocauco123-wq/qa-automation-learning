@@ -16,6 +16,12 @@ jobs:
       - name: Run API test 1
         run: node tests/api.test.js
 
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-1-report
+          path: reports/
+
   api-test-2:
     runs-on: ubuntu-latest
 
@@ -25,3 +31,9 @@ jobs:
 
       - name: Run API test 2
         run: node tests/post.test.js
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-2-report
+          path: reports/
