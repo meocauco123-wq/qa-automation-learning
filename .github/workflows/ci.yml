@@ -1,4 +1,5 @@
-name: QA Automation CI
+git add .
+git statusname: QA Automation CI
 
 on:
   push:
