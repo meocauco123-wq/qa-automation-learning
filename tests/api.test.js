@@ -6,7 +6,7 @@ https.get("https://jsonplaceholder.typicode.com/posts/1", (res) => {
 
   console.log("STATUS:", res.statusCode);
 
-  if (res.statusCode === 201) {
+  if (res.statusCode === 200) {
     console.log("TEST PASS");
     process.exit(0);
   } else {
