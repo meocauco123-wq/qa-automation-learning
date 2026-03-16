@@ -4,6 +4,6 @@
   "scripts": {
     "test-api1": "node tests/api.test.js",
     "test-api2": "node tests/post.test.js",
-    "test": "npm run test-api1 && npm test-api2"
+    "test": "npm run test-api1 && npm run test-api2"
   }
 }
