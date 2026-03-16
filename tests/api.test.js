@@ -3,6 +3,11 @@ const fs = require("fs");
 
 console.log("Start API test");
 
+// tạo folder reports nếu chưa có
+if (!fs.existsSync("reports")) {
+  fs.mkdirSync("reports");
+}
+
 https.get("https://jsonplaceholder.typicode.com/posts/1", (res) => {
 
   const result = `
