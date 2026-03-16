@@ -3,6 +3,8 @@ name: QA Automation CI
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
 
@@ -21,6 +23,16 @@ jobs:
         with:
           name: api-test-1-report
           path: reports/
+      
+      - name: comment PR
+        uses: actions/github-script@v7
+        with:
+          github.rest.issues.createComment ({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "QA Automation Result\n\nAPI tests: PASS\nRegression: PASS"
+          })
 
   api-test-2:
     runs-on: ubuntu-latest
