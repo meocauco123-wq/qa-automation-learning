@@ -15,7 +15,7 @@ async function login() {
     }
   );
 
-  return response.data;
+  return response;
 }
 
 module.exports = { login };
