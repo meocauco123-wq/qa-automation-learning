@@ -1,14 +1,17 @@
 const axios = require("axios");
+const { baseURL } = require("../config/env");
 
 async function getMe(token) {
-  return axios.get(
-    "https://dummyjson.com/auth/me",
+  const response = await axios.get(
+    `${baseURL}/auth/me`,
     {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }
   );
+
+  return response;
 }
 
 module.exports = { getMe };

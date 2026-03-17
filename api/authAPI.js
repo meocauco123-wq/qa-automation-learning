@@ -1,11 +1,12 @@
 const axios = require("axios");
+const { baseURL } = require("../config/env");
 
 async function login(username, password) {
-  return axios.post(
-    "https://dummyjson.com/auth/login",
+  const response = await axios.post(
+    `${baseURL}/auth/login`,
     {
-      username,
-      password
+      username: username,
+      password: password
     },
     {
       headers: {
@@ -13,6 +14,8 @@ async function login(username, password) {
       }
     }
   );
+
+  return response;
 }
 
 module.exports = { login };
