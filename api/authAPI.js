@@ -1,12 +1,11 @@
 const axios = require("axios");
 
-async function login() {
-
-  const response = await axios.post(
+async function login(username, password) {
+  return axios.post(
     "https://dummyjson.com/auth/login",
     {
-      username: "emilys",
-      password: "emilyspass"
+      username,
+      password
     },
     {
       headers: {
@@ -14,8 +13,6 @@ async function login() {
       }
     }
   );
-
-  return response;
 }
 
 module.exports = { login };
