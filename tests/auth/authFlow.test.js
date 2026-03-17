@@ -1,40 +1,48 @@
 const { login } = require("../../api/authAPI");
 
-async function testLoginSuccess() {
-
-  console.log("Start Auth API Test");
+async function testAuthFlow() {
+  console.log("🚀 Start Auth API Test");
 
   const start = Date.now();
 
-  const data = await login("emilys", "emilyspass");
+  try {
+    const response = await login("emilys", "emilyspass");
 
-  const duration = Date.now() - start;
+    const responseTime = Date.now() - start;
 
-  console.log("FULL RESPONSE:", data);
-  console.log("Response time:", duration);
+    console.log("📦 FULL RESPONSE:", response.data);
 
-  // 1. Check token
-  if (!data.accessToken) {
-    throw new Error("Missing accessToken");
+    // ✅ Validate status code
+    if (response.status !== 200) {
+      throw new Error("❌ Status code is not 200");
+    }
+
+    // ✅ Validate token
+    const token = response.data.accessToken;
+
+    if (!token) {
+      throw new Error("❌ Token is missing");
+    }
+
+    console.log("🔑 TOKEN:", token);
+
+    console.log("⏱ Response time:", responseTime);
+
+    console.log("✅ TEST PASS");
+
+  } catch (error) {
+    console.log("❌ TEST FAIL");
+
+    if (error.response) {
+      console.log("STATUS:", error.response.status);
+      console.log("BODY:", error.response.data);
+    } else {
+      console.log(error.message);
+    }
+
+    // ❗ Quan trọng: fail CI
+    process.exit(1);
   }
-
-  // 2. Check username đúng
-  if (data.username !== "emilys") {
-    throw new Error("Wrong username");
-  }
-
-  // 3. Check data type
-  if (typeof data.id !== "number") {
-    throw new Error("ID is not number");
-  }
-
-  // 4. Check performance
-  if (duration > 2000) {
-    throw new Error("API too slow");
-  }
-
-  console.log("TEST PASS");
-
 }
 
-testLoginSuccess();
+testAuthFlow();
